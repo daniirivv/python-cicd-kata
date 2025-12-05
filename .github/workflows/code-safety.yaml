@@ -49,7 +49,7 @@ jobs:
     - run: uv sync --all-extras --dev
 
     - name: Check linter
-      run: uv run check
+      run: uv run ruff check
 
   check-type-safety:
     name: code-safety/check-type-safety

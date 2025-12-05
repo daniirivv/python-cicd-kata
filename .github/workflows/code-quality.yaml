@@ -1,7 +1,7 @@
 name: Code Quality
 run-name: ${{ github.actor }} is checking code quality 🔎
 on:
-  pull-request:z
+  pull_request:
     branches:
       - main
 jobs:

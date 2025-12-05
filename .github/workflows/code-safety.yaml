@@ -4,8 +4,10 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
-  unit-tests:
+
+  check-formatter:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -26,8 +28,65 @@ jobs:
     - name: Check formatter
       run: uv run ruff format
 
+  check-linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Enable caching
+      uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+
+    - uses: actions/setup-python@v6
+      with:
+        python-version-file: ".python-version"
+
+    - uses: astral-sh/setup-uv@v7
+
+    - run: uv sync --all-extras --dev
+
     - name: Check linter
       run: uv run ruff format
+
+  check-type-safety:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Enable caching
+      uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+
+    - uses: actions/setup-python@v6
+      with:
+        python-version-file: ".python-version"
+
+    - uses: astral-sh/setup-uv@v7
+
+    - run: uv sync --all-extras --dev
+
+    - name: Check type-safety
+      run: uv run pyright
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Enable caching
+      uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+
+    - uses: actions/setup-python@v6
+      with:
+        python-version-file: ".python-version"
+
+    - uses: astral-sh/setup-uv@v7
+
+    - run: uv sync --all-extras --dev
 
     - name: Check type-safety
       run: uv run pyright

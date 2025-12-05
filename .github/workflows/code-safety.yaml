@@ -8,6 +8,7 @@ on:
 jobs:
 
   check-formatter:
+    name: code-safety/apply-format
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -29,6 +30,7 @@ jobs:
       run: uv run ruff format
 
   check-linter:
+    name: code-safety/check-linter
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -47,9 +49,10 @@ jobs:
     - run: uv sync --all-extras --dev
 
     - name: Check linter
-      run: uv run ruff format
+      run: uv run check
 
   check-type-safety:
+    name: code-safety/check-type-safety
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -71,6 +74,7 @@ jobs:
       run: uv run pyright
 
   unit-tests:
+    name: code-safety/run-unit-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -87,9 +91,6 @@ jobs:
     - uses: astral-sh/setup-uv@v7
 
     - run: uv sync --all-extras --dev
-
-    - name: Check type-safety
-      run: uv run pyright
 
     - name: Run unit tests
       run: uv run pytest

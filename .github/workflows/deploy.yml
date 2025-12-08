@@ -1,5 +1,5 @@
 name: Deployment
-run-name: Running Deploy: ${{ github.ref }}
+run-name: "Running Deploy: ${{ github.ref }}"
 
 on:
   push:

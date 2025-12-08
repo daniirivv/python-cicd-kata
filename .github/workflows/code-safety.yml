@@ -8,85 +8,105 @@ on:
 jobs:
 
   formatter:
+    name: Code Safety / formatter
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - name: Checkout code
+      uses: actions/checkout@v5
 
     - name: Enable caching
       uses: astral-sh/setup-uv@v7
       with:
         enable-cache: true
 
-    - uses: actions/setup-python@v6
+    - name: Setup Python
+      uses: actions/setup-python@v6
       with:
         python-version-file: ".python-version"
 
-    - uses: astral-sh/setup-uv@v7
+    - name: Setup UV
+      uses: astral-sh/setup-uv@v7
 
-    - run: uv sync --all-extras --dev
+    - name: Install dependencies
+      run: uv sync --all-extras --dev
 
     - name: Check formatter
       run: uv run ruff format
 
   linter:
+    name: Code Safety / linter
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - name: Checkout code
+      uses: actions/checkout@v5
 
     - name: Enable caching
       uses: astral-sh/setup-uv@v7
       with:
         enable-cache: true
 
-    - uses: actions/setup-python@v6
+    - name: Setup Python
+      uses: actions/setup-python@v6
       with:
         python-version-file: ".python-version"
 
-    - uses: astral-sh/setup-uv@v7
+    - name: Setup UV
+      uses: astral-sh/setup-uv@v7
 
-    - run: uv sync --all-extras --dev
+    - name: Install dependencies
+      run: uv sync --all-extras --dev
 
     - name: Check linter
       run: uv run ruff check
 
   type-safety:
+    name: Code Safety / type-safety
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - name: Checkout code
+      uses: actions/checkout@v5
 
     - name: Enable caching
       uses: astral-sh/setup-uv@v7
       with:
         enable-cache: true
 
-    - uses: actions/setup-python@v6
+    - name: Setup Python
+      uses: actions/setup-python@v6
       with:
         python-version-file: ".python-version"
 
-    - uses: astral-sh/setup-uv@v7
+    - name: Setup UV
+      uses: astral-sh/setup-uv@v7
 
-    - run: uv sync --all-extras --dev
+    - name: Install dependencies
+      run: uv sync --all-extras --dev
 
     - name: Check type-safety
       run: uv run pyright
 
   unit-tests:
+    name: Code Safety / unit-tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - name: Checkout code
+      uses: actions/checkout@v5
 
     - name: Enable caching
       uses: astral-sh/setup-uv@v7
       with:
         enable-cache: true
 
-    - uses: actions/setup-python@v6
+    - name: Setup Python
+      uses: actions/setup-python@v6
       with:
         python-version-file: ".python-version"
 
-    - uses: astral-sh/setup-uv@v7
+    - name: Setup UV
+      uses: astral-sh/setup-uv@v7
 
-    - run: uv sync --all-extras --dev
+    - name: Install dependencies
+      run: uv sync --all-extras --dev
 
     - name: Run unit tests
       run: uv run pytest

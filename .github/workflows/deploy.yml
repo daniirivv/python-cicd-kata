@@ -1,4 +1,4 @@
-name: ci
+name: Deployment
 run-name: Running Deploy: ${{ github.ref }}
 
 on:

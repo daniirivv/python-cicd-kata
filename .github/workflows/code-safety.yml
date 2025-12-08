@@ -7,8 +7,7 @@ on:
 
 jobs:
 
-  check-formatter:
-    name: code-safety/apply-format
+  formatter:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -29,8 +28,7 @@ jobs:
     - name: Check formatter
       run: uv run ruff format
 
-  check-linter:
-    name: code-safety/check-linter
+  linter:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -51,8 +49,7 @@ jobs:
     - name: Check linter
       run: uv run ruff check
 
-  check-type-safety:
-    name: code-safety/check-type-safety
+  type-safety:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -74,7 +71,6 @@ jobs:
       run: uv run pyright
 
   unit-tests:
-    name: code-safety/run-unit-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5

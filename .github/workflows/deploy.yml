@@ -26,11 +26,11 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: user/app:latest
+        tags: ${{ vars.DOCKERHUB_USERNAME }}/cicd-kata-dice-roll:latest
 
   render:
     needs: docker
     runs-on: ubuntu-latest
     steps:
     - name: Deploy in Render
-      run: curl "${{ secrets.DEPLOY_WEBHOOK_URL_RENDER }}&imgURL=docker.io%2F${{ vars.DOCKERHUB_USERNAME }}%2Fsimple-service%3Alatest"
+      run: curl "${{ secrets.DEPLOY_WEBHOOK_URL_RENDER }}&imgURL=docker.io%2F${{ vars.DOCKERHUB_USERNAME }}%2Fcicd-kata-dice-roll%3Alatest"
